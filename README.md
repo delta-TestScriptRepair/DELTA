@@ -29,7 +29,7 @@ We conduct our experiments under Python 3.12 using mainstream DL and LLM librari
 | OpenAI SDK   | 0.28.0  |
 | Tiktoken     | 0.8.0   |
 
-
+---
 
 ## 3.Environment
 
@@ -39,10 +39,35 @@ api_key = "sk-..."  # or load from env
 -Please install the packages our experiment require:
 pip install -r requirements.txt
 
+---
+
 ## 4.File Structure
 
+This project contains several folders related to preprocessing, repairing, and evaluating invalid test scripts in DL fuzzing.
 
-## Evaluation
+- `input_files/`: The folder where you put the invalid models in, with .h5 and .pkl file of the same name (e.g. model1.h5,model1.pkl).
+- `gpt_input/`: Models that failed in initial testing and require repair will be moved in to be repaired by LLM.
+- `output_files/`: Successfully repaired test scripts that pass both model loading and prediction.
+- `failure_files/`: Still-invalid test scripts after two rounds of repair. These are logged for further manual inspection or prompt refinement.
+
+To run our framework (DELTA), the main program entry is `run.py`. It will execute the full pipeline: error classification → input generation → script repair → multi-round testing.
+
+The core logic of DELTA is distributed across the following scripts:
+- `api.py`: Defines repair prompt templates and calls GPT via OpenAI API.
+- `code_process.py`: Implements the multi-round repair loop.
+- `generated_input.py`: Helps the generation of input_generation.py.
+- `input_generation.py`: Handles GPT-based generation of `.pkl` inputs for missing-input cases.
+- `input_process.py`: Classifies errors, extracts messages, normalizes model format.
+- `test_model.py`: Validates model predictability using generated inputs.
+- `namedel.py`: Helps rename the file names and clears .pkl files with no related .h5 files.
+Besides, we provide our code to transform MUFFIN's models and inputs to .h5 and .pkl files:
+- ` mfh5.py`: Generates .h5 model file through MUFFIN's models.
+- ` mfpkl.py`: Generates .pkl model input file through MUFFIN's inputs.
+- ` layer_map.py`: Helps with mfh5.py
+
+---
+
+## 5.Experiments
 
 | Tool   | LLM         | Repair Rate | Prompt Reuse |
 | ------ | ----------- | ----------- | ------------ |
