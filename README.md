@@ -69,21 +69,49 @@ Besides, we provide our code to transform MUFFIN's models and inputs to .h5 and 
 
 ## 5.Experiments
 
-| Tool   | LLM         | Repair Rate | Prompt Reuse |
-| ------ | ----------- | ----------- | ------------ |
-| LEMON  | gpt-4-turbo | 100%        | 3.77×        |
-| MUFFIN | gpt-4-turbo | 76.3%       | 4.61×        |
-| CEDAR  | gpt-4-turbo | 90.5%       | 3.35×        |
+### 5.1 Main Method
 
-DELTA repairs are 2–13× faster than regeneration, with up to 14.6% increase in testing throughput.
+**Step 0**: If you want to repair MUFFIN's files:
+- mkdir muffin_files
+- python mfh5.py mfpkl.py
 
-## Citation
+If you want to repair LEMON's files:
+- python namedel.py
 
-If you use DELTA in your research, please cite:
+**Step 1**: Make sure you under repaired files in .input_files/:
+- python run.py
 
-@inproceedings{delta2025,
-  title={Automated Test Script Repair of Deep Learning Library Testing},
-  author={Anonymous},
-  booktitle={ICSE},
-  year={2025}
-}
+### 5.2 Evaluation 
+
+Repair Results across DL Testing Tools
+
+| Tool   | LLM Version     | Invalid | Repaired | Failed | Repair Rate | Repair Scripts |
+|--------|------------------|---------|----------|--------|--------------|----------------|
+| LEMON  | gpt-3.5-turbo    | 49      | 48       | 1      | 97.96%       | 14             |
+| LEMON  | gpt-4-turbo      | 49      | 49       | 0      | 100.00%      | 13             |
+| MUFFIN | gpt-3.5-turbo    | 139     | 94       | 45     | 67.63%       | 24             |
+| MUFFIN | gpt-4-turbo      | 139     | 106      | 33     | 76.26%       | 23             |
+| CEDAR  | gpt-3.5-turbo    | 63      | 56       | 7      | 88.89%       | 17             |
+| CEDAR  | gpt-4-turbo      | 63      | 57       | 6      | 90.48%       | 17             |
+
+Repair Efficiency across DL Testing Tools
+
+| Tool   | LLM Version     | Original Valid Cases | Generation Time (s) | Repaired Cases | Repair Time (s) |
+|--------|------------------|----------------------|----------------------|----------------|-----------------|
+| LEMON  | gpt-3.5-turbo    | 701                  | 37446                | 48             | 247             |
+| LEMON  | gpt-4-turbo      | 701                  | 37446                | 49             | 203             |
+| MUFFIN | gpt-3.5-turbo    | 607                  | 9627                 | 94             | 157             |
+| MUFFIN | gpt-4-turbo      | 607                  | 9627                 | 106            | 237             |
+| CEDAR  | gpt-3.5-turbo    | 1822                 | 15176                | 56             | 175             |
+| CEDAR  | gpt-4-turbo      | 1822                 | 15176                | 57             | 194             |
+
+Prompt Reuse Ratio (𝐷𝐸𝐿𝑇𝐴)
+
+| Tool   | LLM Version     | Repaired Scripts | Unique Prompts | Reuse Ratio |
+|--------|------------------|------------------|----------------|-------------|
+| LEMON  | gpt-3.5-turbo    | 48               | 14             | 3.43        |
+| LEMON  | gpt-4-turbo      | 49               | 13             | 3.77        |
+| MUFFIN | gpt-3.5-turbo    | 94               | 24             | 3.92        |
+| MUFFIN | gpt-4-turbo      | 106              | 23             | 4.61        |
+| CEDAR  | gpt-3.5-turbo    | 56               | 17             | 3.29        |
+| CEDAR  | gpt-4-turbo      | 57               | 17             | 3.35        |
