@@ -1,0 +1,10 @@
+{
+  "Shape Error": {
+    "shapeerror1": {
+      "message": "Error during prediction: Exception encountered when calling Sequential.call().\n\n\u001b[1mInvalid input shape for input Tensor(\"data:0\", shape=(10, 10), dtype=float32). Expected shape (None, 32, 32, 3), but input has incompatible shape (10, 10)\u001b[0m\n\nArguments received by Sequential.call():\n  • inputs=tf.Tensor(shape=(10, 10), dtype=float32)\n  • training=False\n  • mask=None",
+      "models": [
+        "alexnet-cifar10_origin0-GF1.h5"
+      ]
+    }
+  }
+}

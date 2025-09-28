@@ -1,0 +1,21 @@
+{
+  "Structure Error": {
+    "structureerror1": {
+      "message": "Error during prediction: Exception encountered when calling Sequential.call().\n\n\u001b[1mInput 0 of layer is incompatible with the layer: expected axis -1 of input shape to have value 20, but received input with shape (10, 10)\u001b[0m\n\nArguments received by Sequential.call():\n  • inputs=tf.Tensor(shape=(10, 10), dtype=float32)\n  • training=False\n  • mask=None",
+      "models": [
+        "alexnet-cifar10_origin0-GF1.h5"
+      ]
+    }
+  },
+  "No Input Error": {
+    "noinputerror1": {
+      "message": "Missing .pkl input file",
+      "models": [
+        "alexnet-cifar10_origin0-GF1-GF2-GF5.h5",
+        "alexnet-cifar10_origin0-ARep4.h5",
+        "alexnet-cifar10_origin0-GF1-GF2-LC1-ARem3.h5",
+        "alexnet-cifar10_origin0-ARep2.h5"
+      ]
+    }
+  }
+}
