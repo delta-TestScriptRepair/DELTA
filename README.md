@@ -1,6 +1,6 @@
 # DELTA: Automated Repair of Deep Learning Test Scripts
 
-**DELTA (DEep Learning library Test script repAir)** is the official implementation of our ICSE 2025 paper:
+**DELTA (DEep Learning library Test script repAir)** is the official implementation of our ICSE 2026 paper:
 > _“Automated Test Script Repair of Deep Learning Library Testing”_
 
 ## 1.Description
@@ -51,6 +51,10 @@ This project contains several folders related to preprocessing, repairing, and e
 - `failure_files/`: Still-invalid test scripts after two rounds of repair. These are logged for further manual inspection or prompt refinement.
 
 To run our framework (DELTA), the main program entry is `run.py`. It will execute the full pipeline: error classification → input generation → script repair → multi-round testing.
+
+We have provided demo files in the above folders, together with the repairing code in folder `repairs/` and `repairs2/`. We also provide the error_info.json and fail_error_info.json in our pipeline to show the exact error message.
+
+We are uploading the full dataset as fast as possible in zenodo.
 
 The core logic of DELTA is distributed across the following scripts:
 - `api.py`: Defines repair prompt templates and calls GPT via OpenAI API.
