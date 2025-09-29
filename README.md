@@ -54,7 +54,7 @@ To run our framework (DELTA), the main program entry is `run.py`. It will execut
 
 We have provided demo files in the above folders, together with the repairing code in folder `repairs/` and `repairs2/`. We also provide the error_info.json and fail_error_info.json in our pipeline to show the exact error message.
 
-We are uploading the full dataset as fast as possible in zenodo.
+**We are uploading the full dataset as fast as possible in zenodo.**
 
 The core logic of DELTA is distributed across the following scripts:
 - `api.py`: Defines repair prompt templates and calls GPT via OpenAI API.
